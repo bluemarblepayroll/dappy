@@ -7,10 +7,5 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-require 'acts_as_hashable'
-require 'benchmark'
-require 'securerandom'
-require 'time'
-require 'zip'
-
-require_relative 'file_composer/blueprint'
+require_relative 'stores/local'
+require_relative 'stores/null'

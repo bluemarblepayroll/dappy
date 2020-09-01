@@ -7,10 +7,12 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-require 'acts_as_hashable'
-require 'benchmark'
-require 'securerandom'
-require 'time'
-require 'zip'
+require 'yaml'
 
-require_relative 'file_composer/blueprint'
+def read_yaml_file(*filename)
+  YAML.safe_load(read_binary_file(*filename))
+end
+
+def read_binary_file(*filename)
+  File.open(File.join(*filename), 'rb').read
+end
