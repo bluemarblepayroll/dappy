@@ -4,7 +4,6 @@
 
 The library can serve as a foundation for creating a composable and declarative file creation API.  Out of the box, it only provides for the creation of text files and zip archives.  Within zip archives you can compose N number of nested zip archives and text files.  It is designed to first write to disk, then move the written files elsewhere, give then store passed in.  Where this library shines by extension: creating and registering your own document types and using this as a higher-order configuration layer.
 
-
 ## Installation
 
 To install through Rubygems:
