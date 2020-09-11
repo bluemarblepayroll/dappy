@@ -12,7 +12,7 @@ require 'file_helper'
 
 describe FileComposer::Documents::Text do
   let(:temp_root) { File.join(TEMP_DIR, 'text_spec') }
-  let(:filename)  { 'hello_world.txt' }
+  let(:filename)  { 'some/dir/hello_world.txt' }
   let(:data)      { 'HELLO WORLD!' }
   let(:store)     { FileComposer::Stores::Null.new }
 

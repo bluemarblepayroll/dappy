@@ -9,8 +9,8 @@
 
 module FileComposer
   module Stores
-    # File copier from local file system to the local file system.  This class will also
-    # automatically shard the path with YYYY/MM/DD using the passed in date.  The date will default
+    # File copier from local file system to the local file system but with a sharded path
+    # with YYYY/MM/DD using the passed in date.  The date will default
     # to the current date in UTC unless specified otherwise.  The filename passed in will be
     # used to determine the extension but the destination will create a new GUID to use as
     # the filename.  For example:

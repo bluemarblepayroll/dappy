@@ -3,7 +3,7 @@ documents:
     filename: hello_world_1.txt
     data: FIRST HELLO WORLD!
   - type: text
-    filename: hello_world_2.txt
+    filename: some/directory/hello_world_2.txt
     data: SECOND HELLO WORLD!
   - type: zip
     filename: nested.zip
