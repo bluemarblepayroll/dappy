@@ -11,7 +11,15 @@ module FileComposer
   module Stores
     # File copier from local file system to the local file system.  This class will also
     # automatically shard the path with YYYY/MM/DD using the passed in date.  The date will default
-    # to the current date in UTC unless specified otherwise.
+    # to the current date in UTC unless specified otherwise.  The filename passed in will be
+    # used to determine the extension but the destination will create a new GUID to use as
+    # the filename.  For example:
+    # - input: some/path/input.txt
+    # - output: 2020/06/25/82d042eb-9592-47f1-8019-2f06f73dc053.txt
+    # The reason it returns a completely random name is to ensure the file truly has a unique
+    # place to live, independent of what was passed in.  You are free to change these assumptions
+    # by creating and using your own store if any of these implementation details do not fit
+    # your specific use case.
     class Local
       attr_reader :date, :root
 
