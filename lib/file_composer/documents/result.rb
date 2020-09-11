@@ -9,7 +9,9 @@
 
 module FileComposer
   class Documents
-    # The production of a document.
+    # Returns the result of a FileComposer::Document#write! call.  Each #write! call can produce
+    # N number of documents and each document will be represented in this instance's file_results
+    # attribute.
     class Result
       attr_reader :file_results,
                   :time_in_seconds

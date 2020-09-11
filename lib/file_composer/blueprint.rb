@@ -19,10 +19,10 @@ module FileComposer
 
     def initialize(documents: [])
       @documents = Documents.array(documents)
+      filenames  = @documents.map { |a| a.filename.downcase }
+      not_unique = filenames.uniq.length != @documents.length
 
-      filenames = @documents.map { |a| a.filename.downcase }
-
-      raise ArgumentError, "not unique: #{filenames}" if filenames.uniq.length != @documents.length
+      raise ArgumentError, "filenames not unique: #{filenames}" if not_unique
     end
 
     def write!(temp_root = '', store = Stores::Null.new)

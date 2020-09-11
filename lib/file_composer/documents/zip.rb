@@ -23,8 +23,14 @@ module FileComposer
 
       def write!(temp_root = '', store = Stores::Null.new)
         results               = blueprint.write!(temp_root)
-        total_time_in_seconds = results.sum(&:time_in_seconds)
-        physical_filename     = zip!(temp_root, results)
+        write_time_in_seconds = results.sum(&:time_in_seconds)
+        physical_filename     = nil
+
+        zip_time_in_seconds = Benchmark.measure do
+          physical_filename = zip!(temp_root, results)
+        end.real
+
+        total_time_in_seconds = write_time_in_seconds + zip_time_in_seconds
 
         cleanup(results)
 

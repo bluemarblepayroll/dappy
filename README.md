@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/file_composer.svg)](https://badge.fury.io/rb/file_composer) [![Build Status](https://travis-ci.org/bluemarblepayroll/file_composer.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/file_composer) [![Maintainability](https://api.codeclimate.com/v1/badges/5360d687b0e93a4c7cf5/maintainability)](https://codeclimate.com/github/bluemarblepayroll/file_composer/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/5360d687b0e93a4c7cf5/test_coverage)](https://codeclimate.com/github/bluemarblepayroll/file_composer/test_coverage) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The library can serve as a foundation for creating a composable and declarative file creation API.  Out of the box, it only provides for the creation of text files and zip archives.  Within zip archives you can compose N number of nested zip archives and text files.  It is designed to first write to disk, then move the written files elsewhere, give then store passed in.  Where this library shines by extension: creating and registering your own document types and using this as a higher-order configuration layer.
+The library can serve as a foundation for creating a composable and declarative file creation API.  Out of the box, it only provides for the creation of text files and zip archives.  Within zip archives you can compose N number of nested zip archives and text files.  It is designed to first write to disk, then move the written files elsewhere, give then store passed in.  This library is intended to be extended by registering your own document types and then using File Composer as a higher-order configuration layer.
 
 ## Installation
 
@@ -62,14 +62,14 @@ blueprint = FileComposer::Blueprint.make(config)
 results = blueprint.write!(temp_path)
 ````
 
-The two files should now be located in `/tmp/file_composer` within the relative path.
+The two files should now be located in `tmp/file_composer` within the relative path.
 
 ### Writing to Permanent Storage
 
 The second argument for `Blueprint#write!` can be a Ruby object instance that responds to `move!(local_filename)` and returns the permanent location.  By default this library only ships with two stores:
 
 * **FileComposer::Stores::Null**: perform no move and return the temporary file path.
-* **FileComposer::Stores::Local**: perform a file move and return the new file path.
+* **FileComposer::Stores::Local**: perform a file move and return the new file path.  The file path will also be sharded using the inputted date (defaults to the current date UTC).  The sharding helps ensure a more even distribution of files so one directory does not end up with all the files.
 
 An example using a local store would be:
 
@@ -82,7 +82,7 @@ blueprint = FileComposer::Blueprint.make(config)
 results = blueprint.write!(temp_path, store)
 ````
 
-This will now produce two files within a `storage\YYYY\MM\DD` directory in the relative path.  These files were initially written within the temporary store, but then moved after completion.
+This will now produce two files within a `storage/YYYY/MM/DD` directory in the relative path.  These files were initially written within the temporary store, but then moved after completion.
 
 ### Custom Stores
 
@@ -137,7 +137,7 @@ This would now generate three files within the current relative path.  Some note
 
 ### Plugging in Custom Documents
 
-The documents: text files and zip archives are meant to serve as 'core' documents.  Consumer applications will not find much value in these types by themselves.  The class `FileComposer::Documents` is a factory that is able to have document types plugged in using the [acts_as_hashable_factory](https://github.com/bluemarblepayroll/acts_as_hashable) API.
+The documents, text files and zip archives, are meant to serve as 'core' documents.  Consumer applications will not find much value in these types by themselves.  The class `FileComposer::Documents` is a factory that is able to have document types plugged in using the [acts_as_hashable_factory](https://github.com/bluemarblepayroll/acts_as_hashable) API.
 
 ## Contributing
 

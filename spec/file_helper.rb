@@ -14,5 +14,5 @@ def read_yaml_file(*filename)
 end
 
 def read_binary_file(*filename)
-  File.open(File.join(*filename), 'rb').read
+  File.open(File.join(*filename)).read
 end

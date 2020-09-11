@@ -9,7 +9,9 @@
 
 module FileComposer
   module Stores
-    # File copier from local file system to the local file system.
+    # File copier from local file system to the local file system.  This class will also
+    # automatically shard the path with YYYY/MM/DD using the passed in date.  The date will default
+    # to the current date in UTC unless specified otherwise.
     class Local
       attr_reader :date, :root
 
@@ -23,8 +25,7 @@ module FileComposer
       def move!(filename)
         make_final_filename(filename).tap do |final_filename|
           ensure_directory_exists(final_filename)
-          FileUtils.cp(filename, final_filename)
-          FileUtils.rm(filename, force: true)
+          FileUtils.mv(filename, final_filename)
         end
       end
 
@@ -38,17 +39,12 @@ module FileComposer
 
       def random_filename_parts(extension)
         [
+          root,
           date.year.to_s,
           date.month.to_s,
           date.day.to_s,
           "#{SecureRandom.uuid}#{extension}"
-        ].tap do |parts|
-          parts.unshift(root) if root?
-        end
-      end
-
-      def root?
-        !root.empty?
+        ].compact
       end
 
       def ensure_directory_exists(filename)

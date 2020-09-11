@@ -5,7 +5,7 @@ require './lib/file_composer/version'
 Gem::Specification.new do |s|
   s.name        = 'file_composer'
   s.version     = FileComposer::VERSION
-  s.summary     = 'High-level, pluggable and YAML-based API for creating files'
+  s.summary     = 'High-level, pluggable, and declarative API for creating files'
 
   s.description = <<-DESCRIPTION
     This library provides a YAML-based configuration, called a Blueprint, that allows you to specify text files and zip files and it will create them.  It is pluggable so other document types and storage mediums can be added.
