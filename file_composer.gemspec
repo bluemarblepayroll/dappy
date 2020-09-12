@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.summary     = 'High-level, pluggable, and declarative API for creating files'
 
   s.description = <<-DESCRIPTION
-    This library provides a YAML-based configuration, called a Blueprint, that allows you to specify text files and zip files and it will create them.  It is pluggable so other document types and storage mediums can be added.
+    This library provides a declarative API, called a Blueprint, that allows you to specify text files and zip files and it will create them.  It is pluggable so other document types and storage mediums can be added.
   DESCRIPTION
 
   s.authors     = ['Matthew Ruggio']
